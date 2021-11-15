@@ -12,9 +12,14 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
+import java.sql.Connection
 
 
 class MainActivity : AppCompatActivity(), OnItemListener {
+    private var connect: Connection? = null
+    private var connectionRestult = ""
+
+
     private var monthYearText: TextView? = null
     private var calendarRecyclerView: RecyclerView? = null
     private var selectedDate: LocalDate? = null
@@ -29,6 +34,7 @@ class MainActivity : AppCompatActivity(), OnItemListener {
     private fun initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         monthYearText = findViewById(R.id.monthYearTV)
+        getConnectionRestult()
     }
 
     private fun setMonthView() {
@@ -76,5 +82,10 @@ class MainActivity : AppCompatActivity(), OnItemListener {
             val message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate)
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
+    }
+    private fun getConnectionRestult() {
+        val connectionHelper = ConnectionHelper()
+        connect = connectionHelper.connectionClass()
+        if (connect != null) println("dsbjvkj")
     }
 }
